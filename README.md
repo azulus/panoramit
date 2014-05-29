@@ -11,8 +11,7 @@ Usage:
 var panoramit = require('panoramit');
 
 panoramit.generate({
-  inputDir: path.join(__dirname, 'input'),
-  inputExt: 'jpg',
+  inputPaths: [path.join(__dirname, 'input', '*.jpg')],
   outputFile: path.join(__dirname, 'out', 'out.jpg'),
   tempDir: path.join(__dirname, 'tmp'),
 

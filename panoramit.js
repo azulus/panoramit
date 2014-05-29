@@ -5,8 +5,7 @@ var path = require('path');
  * Generates a panorama from a set of input images
  *
  * @param  {{
- *             inputDir: string,
- *             inputExt: string,
+ *             inputPaths: string|Array.<string>,
  *             outputFile: string,
  *             tempDir: string,
  *             debug: boolean|undefined
@@ -16,11 +15,9 @@ var path = require('path');
  */
 var generatePanorama = function(options, callback) {
   // validate inputs
-	var inputDir = options.inputDir;
-	if (!inputDir) return callback(new Error('options.inputDir is required'));
-	var inputExt = options.inputExt;
-	if (!inputExt) return callback(new Error('options.inputExt is required'));
-	var outputFile = options.outputFile;
+  var inputPaths = options.inputPaths;
+  if (!inputPaths) return callback(new Error('options.inputPaths is required'));
+  var outputFile = options.outputFile;
 	if (!outputFile) return callback(new Error('options.outputFile is required'));
 	var tempDir = options.tempDir;
 	if (!tempDir) return callback(new Error('options.tempDir is required'));
@@ -28,16 +25,16 @@ var generatePanorama = function(options, callback) {
 
   // set up common paths
 	var paths = {
-		INPUT_WILDCARD: path.join(inputDir, '*.' + inputExt),
 		PTO_FILE: path.join(tempDir, 'project.pto'),
     MK_FILE: path.join(tempDir, 'project.mk'),
     DEFAULT_OUTPUT_FILE: path.join(tempDir, 'prefix.tif'),
     PREFIX_OUTPUT_FILES: path.join(tempDir, 'prefix*.tif')
 	};
+  if (!Array.isArray(inputPaths)) inputPaths = [inputPaths];
 
   // build the base set of commands for panorama generation
 	commands = [
-		'pto_gen -o ' + paths.PTO_FILE + ' ' + paths.INPUT_WILDCARD,
+		'pto_gen -o ' + paths.PTO_FILE + ' ' + inputPaths.join(' '),
 		'cpfind -o ' + paths.PTO_FILE + ' --multirow --celeste ' + paths.PTO_FILE ,
 		'cpclean -o ' + paths.PTO_FILE + ' ' + paths.PTO_FILE ,
 		'linefind -o ' + paths.PTO_FILE + ' ' + paths.PTO_FILE ,

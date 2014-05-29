@@ -1,6 +1,6 @@
 {
   "name": "panoramit",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Jeremy Stanley <github@azulus.com>",
   "description": "A node module to generate panoramas from input images via Hugin",
   "repository": {
