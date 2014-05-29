@@ -3,7 +3,7 @@ panoramit
 
 This module requires that Hugin is installed and available via the command line, you may install it from here: http://sourceforge.net/projects/hugin/files/
 
-If you wish to convert your output image to a non-tif file, please install graphicsmagick and make sure that `convert` is available on the command line.
+If you wish to convert your output image to a non-tif file, please install graphicsmagick and make sure that `gm` is available on the command line.
 
 Usage:
 
