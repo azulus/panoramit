@@ -50,7 +50,7 @@ var generatePanorama = function(options, callback) {
   var desiredOutputExtension = outputFile.split('.').pop();
   if (desiredOutputExtension.toLowerCase() !== 'tif') {
     // use imagemagick to convert into the desired format
-    commands.push('convert ' + paths.DEFAULT_OUTPUT_FILE + ' ' + outputFile);
+    commands.push('gm convert ' + paths.DEFAULT_OUTPUT_FILE + ' ' + outputFile);
   } else {
     // just move the file
     commands.push('mv ' + paths.DEFAULT_OUTPUT_FILE + ' ' + outputFile);
